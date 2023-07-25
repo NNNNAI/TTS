@@ -1,0 +1,1 @@
+ln -s /dataset/lny/project/TTS_output ./output

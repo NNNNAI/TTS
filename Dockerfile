@@ -33,16 +33,16 @@ FROM ${BASE} as base
 RUN echo "Acquire::http::Proxy \"http://devops.io:3142\";" > /etc/apt/apt.conf.d/00aptproxy
 
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y --no-install-recommends gcc g++ make python3 python3-dev python3-pip python3-venv python3-wheel espeak-ng libsndfile1-dev sudo && rm -rf /var/lib/apt/lists/*
+RUN apt-get install -y --no-install-recommends gcc g++ make python3 python3-dev python3-pip python3-venv python3-wheel espeak-ng libsndfile1-dev sudo git && rm -rf /var/lib/apt/lists/*
 RUN pip3 install -U pip
 RUN pip3 config set global.index-url https://pypi.mirrors.ustc.edu.cn/simple
 RUN pip3 config set install.trusted-host mirrors.ustc.edu.cn
 RUN pip3 install llvmlite --ignore-installed
 
-WORKDIR /root
-COPY . /root
+WORKDIR /TTS
+COPY . /TTS
 RUN pip3 install torch torchaudio --extra-index-url https://download.pytorch.org/whl/cu118 
-RUN rm -rf /root/.cache/pip
+# RUN rm -rf /root/.cache/pip
 RUN make install
 # ENTRYPOINT ["tts"]
 # CMD ["--help"]
