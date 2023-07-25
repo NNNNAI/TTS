@@ -1,13 +1,27 @@
-ARG BASE=nvidia/cuda:11.8.0-base-ubuntu22.04
-FROM ${BASE}
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y --no-install-recommends gcc g++ make python3 python3-dev python3-pip python3-venv python3-wheel espeak-ng libsndfile1-dev && rm -rf /var/lib/apt/lists/*
-RUN pip3 install llvmlite --ignore-installed
+# base image
+FROM nvcr.io/nvidia/pytorch:22.02-py3 as base
 
-WORKDIR /root
-COPY . /root
-RUN pip3 install torch torchaudio --extra-index-url https://download.pytorch.org/whl/cu118
-RUN rm -rf /root/.cache/pip
-RUN make install
-ENTRYPOINT ["tts"]
-CMD ["--help"]
+
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+
+
+RUN echo "Acquire::http::Proxy \"http://devops.io:3142\";" > /etc/apt/apt.conf.d/00aptproxy
+
+RUN apt-get update && apt-get install -y libglib2.0-0 libgl1-mesa-glx sudo  \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+
+# RUN pip install -r requirements.txt -i http://devops.io:3141/root/pypi/+simple --trusted-host devops.io
+RUN pip install torchaudio --extra-index-url https://download.pytorch.org/whl/cu116 -i http://devops.io:3141/root/pypi/+simple --trusted-host devops.io
+
+WORKDIR /TTS
+
+# Platform debug
+FROM base as platform-debug
+
+RUN apt update --allow-insecure-repositories \
+    && apt install -y \
+    openssh-server

@@ -1,0 +1,37 @@
+{
+	"name": "TTS",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": "..",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "../Dockerfile_ori",
+		"target": "platform-debug"
+	},
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached",
+		"source=/dataset,target=/dataset,type=bind,consistency=cached"
+	],
+	"workspaceFolder": "/TTS",
+	// "workspaceMount": "source=${localWorkspaceFolder},target=/gddi_facerecognition_final,type=bind,consistency=cached",
+	"runArgs": [
+		"--gpus",
+		"all",
+		"--shm-size=16g"
+	],
+	"hostRequirements": {
+		"memory": "15gb"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"charliermarsh.ruff",
+				"lfs.vscode-emacs-friendly",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"GitHub.copilot",
+				"redjue.git-commit-plugin",
+				"sourcery.sourcery"
+			]
+		}
+	}
+}
