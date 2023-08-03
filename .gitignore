@@ -170,3 +170,4 @@ depot/*
 coqui_recipes/*
 local_scripts/*
 output/
+recipes/ljspeech/vits_tts/vits_ljspeech*

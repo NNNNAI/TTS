@@ -7,12 +7,6 @@
 		"dockerfile": "../Dockerfile",
 		"target": "development"
 	},
-	"mounts": [
-		"source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached",
-		"source=/dataset,target=/dataset,type=bind,consistency=cached"
-	],
-	"workspaceFolder": "/TTS",
-	// "workspaceMount": "source=${localWorkspaceFolder},target=/gddi_facerecognition_final,type=bind,consistency=cached",
 	"runArgs": [
 		"--gpus",
 		"all",
@@ -21,6 +15,12 @@
 	"hostRequirements": {
 		"memory": "15gb"
 	},
+	"mounts": [
+		"source=${localEnv:HOME}/gddi-nas,target=/gddi-nas,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/ml-data,target=/ml-data,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.ssh,target=/home/myuser/.ssh,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.vscode-server,target=/home/myuser/.vscode-server,type=bind,consistency=cached",
+	],
 	"customizations": {
 		"vscode": {
 			"extensions": [
