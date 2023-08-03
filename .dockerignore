@@ -7,3 +7,4 @@ tests/outputs/*
 tests/train_outputs/*
 __pycache__/
 *.pyc
+recipes/ljspeech/vits_tts/phoneme_cache/

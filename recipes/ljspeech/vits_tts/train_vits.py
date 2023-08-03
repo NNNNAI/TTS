@@ -9,7 +9,8 @@ from TTS.tts.models.vits import Vits, VitsAudioConfig
 from TTS.tts.utils.text.tokenizer import TTSTokenizer
 from TTS.utils.audio import AudioProcessor
 
-output_path = os.path.dirname(os.path.abspath(__file__))
+output_path = "/ml-data/lny/project/TTS_output/Vits_ljspeech"
+os.makedirs(output_path, exist_ok=True)
 dataset_config = BaseDatasetConfig(
     formatter="ljspeech", meta_file_train="metadata.csv", path=os.path.join(output_path, "/ml-data/lny/dataset/audio/LJSpeech-1.1")
 )

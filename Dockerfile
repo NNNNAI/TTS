@@ -41,11 +41,16 @@ RUN pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip3 config set install.trusted-host tuna.tsinghua.edu.cn
 RUN pip3 install llvmlite --ignore-installed
 
-COPY . /workspace/TTS
-WORKDIR /workspace/TTS
 RUN pip3 install torch torchaudio --extra-index-url https://download.pytorch.org/whl/cu118  -i https://pypi.mirrors.ustc.edu.cn/simple/
 # RUN rm -rf /root/.cache/pip
+
+
+COPY . /workspace/TTS
+WORKDIR /workspace/TTS
+
 RUN make install
+
+
 # ENTRYPOINT ["tts"]
 # CMD ["--help"]
 
