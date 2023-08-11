@@ -141,7 +141,7 @@ trainer_*_log.txt
 tests/outputs/*
 tests/train_outputs/*
 TODO.txt
-.vscode/*
+# .vscode/*
 data/*
 notebooks/data/*
 TTS/tts/utils/monotonic_align/core.c
