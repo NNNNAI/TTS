@@ -21,15 +21,15 @@ RUN apt update --allow-insecure-repositories \
 
 RUN pip config set global.index-url https://mirrors.ustc.edu.cn/pypi/web/simple
 
-COPY . /TTS
-WORKDIR /TTS
-RUN make install
+# COPY . /TTS
+# WORKDIR /TTS
+# RUN make install
 
-FROM base as development
-# User Dev
-RUN useradd -ms /bin/bash myuser && usermod -aG sudo myuser
-# New added for disable sudo password
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-# Set as default user
-USER myuser
+# FROM base as development
+# # User Dev
+# RUN useradd -ms /bin/bash myuser && usermod -aG sudo myuser
+# # New added for disable sudo password
+# RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+# # Set as default user
+# USER myuser
 
